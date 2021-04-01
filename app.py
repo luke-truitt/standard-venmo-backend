@@ -8,22 +8,6 @@ import database
 app = Flask(__name__)
 # Eliminate CORS issue.
 CORS(app)
-@app.route('/calculated', methods=['POST'])
-def post_calculation():
-    param = request.get_json()
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
-        database.add_calc_result(param)
-        return jsonify({
-            "Message": f"Welcome {param.get('email')} to our awesome platform!!",
-            # Add this option to distinct the POST request
-            "METHOD" : "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "no name found, please send a name."
-        })
 
 @app.route('/waitlist', methods=['POST'])
 def post_waitlist():
@@ -32,10 +16,9 @@ def post_waitlist():
     
     # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
     if param:
-        referId = database.add_email(param)
+        database.add_email(param)
         return jsonify({
-            "Message": f"Welcome {param.get('email')} to our awesome platform!! Here is your referId: {referId}",
-            "referId": referId,
+            "Message": f"Welcome {param.get('email')} to our awesome platform!!",
             # Add this option to distinct the POST request
             "METHOD" : "POST"
         })
