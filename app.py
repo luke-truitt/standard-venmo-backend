@@ -16,9 +16,10 @@ def post_waitlist():
     
     # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
     if param:
-        database.add_email(param)
+        waitlist_spot = database.add_email(param)
         return jsonify({
             "Message": f"Welcome {param.get('email')} to our awesome platform!!",
+            "waitlist_spot": waitlist_spot,
             # Add this option to distinct the POST request
             "METHOD" : "POST"
         })
